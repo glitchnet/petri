@@ -15,7 +15,7 @@ root.fixed = true;
 
 var force = d3.layout.force()
     .gravity(0)
-    .charge(function(d, i) { return i ? 0 : -25; })
+    .charge(function(d, i) { return i ? 0 : -15; })
     .nodes(nodes)
     .size([width, height]);
 
