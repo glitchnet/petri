@@ -69,14 +69,23 @@ svg.selectAll("polygon")
     .style("transform-origin", function(d, i) {return "center center";})
     .style("fill", "transparent");
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
-// svg.selectAll("circle")
-//     .data(squiggles.splice(1))
-//   .enter().append("circle")
-//     .attr("r", function(d) { return 15; })
-//     .style("stroke", function(d, i) { return "#cccccc"; })
-//     .style("stroke-width", function(d, i) { return "2px"; })
-//     .style("fill", function(d, i) { return "transparent"; });
+svg.selectAll("path")
+    .data(squiggles.splice(1))
+  .enter().append("path")
+    .attr("transform", function(d, i) { 
+      var rotation = getRandomArbitrary(0, 360);
+      return "rotate(" + rotation + ", " + rotation + ", " + rotation + ")";
+    })
+    .style("transform-origin", function(d, i) {return "center center";})
+    .style("stroke", function(d, i) { return "#240eba"; })
+    .style("stroke-width", function(d, i) { return "2px"; })
+    .style("stroke-linejoin", function(d, i) { return "round"; })
+    .style("stroke-linecap", function(d, i) { return "round"; })
+    .style("fill", function(d, i) { return "transparent"; });
 
 force.on("tick", function(e) {
   var q = d3.geom.quadtree(nodes),
@@ -86,6 +95,10 @@ force.on("tick", function(e) {
   while (++i < n) q.visit(collide(nodes[i]));
 
   svg.selectAll("circle")
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; });
+
+  svg.selectAll("path")
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; });
 
@@ -104,6 +117,8 @@ force.on("tick", function(e) {
       return pathData.join(' ');
     });
 
+  svg.selectAll("path")
+    .attr("d", function(d) { return "M" + d.x + " " + d.y + " Q " + (d.x + 20) + " " + (d.y + 20) + ", " + (d.x + 40) + " " + (d.y + 2) + " T " + (d.x + 80) + " " + (d.y + 5); })
 });
 
 svg.on("mousemove", function() {
