@@ -6,10 +6,29 @@
   background: -o-linear-gradient(rgba(26, 14, 186, 0.25), white); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(rgba(26, 14, 186, 0.25), white); /* For Firefox 3.6 to 15 */
   background: linear-gradient(rgba(26, 14, 186, 0.25), white); /* Standard syntax */
+  display: flex;
+  justify-content: center;
 }
 
 svg {
   fill: #240eba;
   width: 100vw;
   height: 100vh;
+}
+
+.this-week {
+  align-self: center;
+  background-color: transparent;
+  color: #240eba;
+  flex: 0 0 auto;
+  font-family: Arial;
+  font-size: 4em;
+  font-weight: bold;
+  position: absolute;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.fonts-loaded {
+  
 }
